@@ -1,2 +1,2 @@
 # uMeet_Front_End
-Front end React Native app of uMeet application.
+Front end [React Native](https://facebook.github.io/react-native/) app of uMeet application.
