@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "uMeet",
-    "description": "This project is really great.",
+    "description": "A mobile/web based game used to encourage interaction between randomly chosen people by giving them a question to ask the other person within a certain timeframe.",
     "slug": "uMeet",
     "privacy": "public",
     "sdkVersion": "30.0.0",
