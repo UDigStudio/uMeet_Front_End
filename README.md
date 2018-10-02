@@ -10,10 +10,10 @@ This game is intended to encourage interaction between people who don't know eac
 A leaderboard will also be present, giving you points after you've successfully interacted with someone.
 
 ## Purpose of this Repo
-This repo contains the UI for [uMeet](https://github.com/UDigStudio/uMeet)
+This repo contains the UI for [uMeet](https://github.com/UDigStudio/uMeet).
 
 ## Issues
-The only issues filed in this repo should pertain directly to the UI codebase for uMeet. Services and requirements issues belong elsewhere. See the [parent repo](https://github.com/UDigStudio/uMeet) for more info
+The only issues filed in this repo should pertain directly to the UI codebase for uMeet. Services and requirements issues belong elsewhere. See the [parent repo](https://github.com/UDigStudio/uMeet) for more info.
 
 ## Target Audience
 uMeet is designed to be contributer friendly and open to anyone that uses the [github flow](https://guides.github.com/introduction/flow/)!
