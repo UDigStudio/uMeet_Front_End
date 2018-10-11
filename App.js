@@ -1,6 +1,10 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
+
+export default from './storybook';
+// To switch to app uncomment and comment line above.
+/*
 export default class App extends React.Component {
   render() {
     return (
@@ -19,3 +23,4 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+*/
