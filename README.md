@@ -1,5 +1,5 @@
 # uMeet_Front_End
-Front end React Native app of uMeet application. 
+Front end React Native app of uMeet application.
 
 # uMeet
 A mobile/web based game used to encourage interaction between randomly chosen people by giving them a question to ask the other person within a certain timeframe.
@@ -36,19 +36,16 @@ To perform front-end development, you will need an iPhone and Android emulator t
   * Open MacOS Terminal
   * Type this command and hit Enter: brew install yarn
   * Type this command and hit Enter: brew upgrade yarn
-5. Install the Create React Native App:
-  * Open MacOS Terminal
-  * Type this command and hit Enter: yarn global add create-react-native-app
-6. Configure XCode:
+5. Configure XCode:
   * Open XCode
   * Select Preferences
   * Select Locations
   * Select the Command Line Tools from the dropdown
-7. Install Java JDK:
+6. Install Java JDK:
   * Go to this URL: https://java.com/en/download/mac_download.jsp
   * Download Java
   * Follow the installation instructions to install Java
-8. Install Android Studio
+7. Install Android Studio
   * Go to this URL: https://developer.android.com/studio/
   * Download Android Studio
   * Choose a Custom setup during installation
@@ -95,7 +92,7 @@ To perform front-end development, you will need an iPhone and Android emulator t
     * Add the Android SDK Location your found as an export in this file
     * Type this command: source ~/.bash_profile
     * Type this command in MacOS Terminal and verify output: adb
-9. Setup Android emulator
+8. Setup Android emulator
   * Open Android Studio
   * Select Start a New Android Stuid project
   * Install any dependencies that fail
@@ -106,4 +103,4 @@ To perform front-end development, you will need an iPhone and Android emulator t
   * Select an image
   * Finish and complete installation
   * Click Play
-10. To configure the Android emulator for Create React Native App, follow the instructions at this [URL](https://bit.ly/2IWqQ8n)
+9. To configure the Android emulator for Create React Native App, follow the instructions at this [URL](https://bit.ly/2IWqQ8n)
