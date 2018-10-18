@@ -3,11 +3,19 @@ import { linkTo } from '@storybook/addon-links';
 import { storiesOf } from '@storybook/react-native';
 import React from 'react';
 import { Text } from 'react-native';
+import CreateAccount from '../../components/admin/create-account.component';
 import Login from '../../components/login/login.component';
 import ResetPassword from '../../components/reset-password/reset-password.component';
 import Button from './Button';
 import CenterView from './CenterView';
 import Welcome from './Welcome';
+
+storiesOf('Admin/CreateAccount', module)
+  .add('Render', () => (
+    <CreateAccount
+      onCreateAccount={action('create account')}
+    />
+  ));
 
 storiesOf('Authentication/Login', module)
   .add('Render', () => (
