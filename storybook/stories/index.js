@@ -4,15 +4,23 @@ import { storiesOf } from '@storybook/react-native';
 import React from 'react';
 import { Text } from 'react-native';
 import Login from '../../components/login/login.component';
+import ResetPassword from '../../components/reset-password/reset-password.component';
 import Button from './Button';
 import CenterView from './CenterView';
 import Welcome from './Welcome';
 
-storiesOf('Login', module)
+storiesOf('Authentication/Login', module)
   .add('Render', () => (
     <Login
       onLogin={action('login')}
       onResetPassword={action('reset password')}
+    />
+  ));
+
+storiesOf('Authentication/ResetPassword', module)
+  .add('Render', () => (
+    <ResetPassword
+      onReset={action('reset action')}
     />
   ));
 
