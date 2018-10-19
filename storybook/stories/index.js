@@ -6,9 +6,7 @@ import { Text } from 'react-native';
 import CreateAccount from '../../components/admin/create-account.component';
 import Login from '../../components/login/login.component';
 import ResetPassword from '../../components/reset-password/reset-password.component';
-import Button from './Button';
-import CenterView from './CenterView';
-import Welcome from './Welcome';
+import QuestionList from '../../components/question-list/question-list.component';
 
 storiesOf('Admin/CreateAccount', module)
   .add('Render', () => (
@@ -32,17 +30,10 @@ storiesOf('Authentication/ResetPassword', module)
     />
   ));
 
-storiesOf('Welcome', module).add('to Storybook', () => <Welcome showApp={linkTo('Button')} />);
+storiesOf('Manage Questions', module)
+    .add('Show Question List', () => (
+      <QuestionList 
+        questions={[{ id: '1', text: 'First question?' }, { id: '2', text: 'Second question?' }]}
+      />
+    ));
 
-storiesOf('Button', module)
-  .addDecorator(getStory => <CenterView>{getStory()}</CenterView>)
-  .add('with text', () => (
-    <Button onPress={action('clicked-text')}>
-      <Text>Hello Button</Text>
-    </Button>
-  ))
-  .add('with some emoji', () => (
-    <Button onPress={action('clicked-emoji')}>
-      <Text>😀 😎 👍 💯</Text>
-    </Button>
-  ));

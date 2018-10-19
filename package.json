@@ -7,12 +7,15 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "eject": "expo eject",
-    "storybook": "storybook start -p 7007"
+    "storybook": "storybook start -p 7007",
+    "test": "jest"
   },
   "dependencies": {
     "expo": "^30.0.1",
+    "jest": "^23.6.0",
     "react": "16.3.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-30.0.0.tar.gz",
+    "react-native-elements": "^0.19.1",
     "whatwg-fetch": "2.0.4"
   },
   "devDependencies": {
@@ -23,6 +26,10 @@
     "babel-core": "^6.26.3",
     "babel-runtime": "^6.26.0",
     "prop-types": "^15.6.2",
-    "react-dom": "16.3.1"
+    "react-dom": "16.3.1",
+    "react-test-renderer": "^16.5.2"
+  },
+  "jest": {
+    "preset": "react-native"
   }
 }
