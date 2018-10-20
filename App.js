@@ -1,6 +1,11 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { 
+  StyleSheet, 
+  Text, 
+  View 
+} from 'react-native';
 
+//TODO: Configure stack navigator and storybook together
 
 export default from './storybook';
 // To switch to app uncomment and comment line above.
