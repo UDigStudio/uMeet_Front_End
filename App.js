@@ -1,20 +1,11 @@
 import React from 'react';
-import { 
-  StyleSheet, 
-  Text, 
-  View 
-} from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
-//TODO: Configure stack navigator and storybook together
-
-export default from './storybook';
-// To switch to app uncomment and comment line above.
-/*
 export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Hello, friend!</Text>
+        <Text>Open up App.js to start working on your app!</Text>
       </View>
     );
   }
@@ -28,4 +19,3 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
-*/

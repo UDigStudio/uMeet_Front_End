@@ -104,3 +104,9 @@ To perform front-end development, you will need an iPhone and Android emulator t
   * Finish and complete installation
   * Click Play
 9. To configure the Android emulator for Create React Native App, follow the instructions at this [URL](https://bit.ly/2IWqQ8n)
+
+## Run Modes
+There are currently three main run modes for this app:
+1. Run the application in Expobook mode (like Storybook): yarn run expobook
+2. Run the application in iOS simulator: yarn run ios
+3. Run the application on Android: yarn run android
