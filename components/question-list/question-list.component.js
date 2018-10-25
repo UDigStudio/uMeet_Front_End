@@ -1,30 +1,49 @@
-import React, { Component }  from 'react';
-import { 
-  View, 
-  Text,
-  StyleSheet
-} from 'react-native';
-import {
-  List,
-  ListItem
-} from 'react-native-elements';
+import React, { Component } from 'react';
+import { StyleSheet, View } from 'react-native';
+import { ListItem } from 'react-native-elements';
 
 //TO-DO: Add redux
 
 class QuestionList extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      questions: props.questions,
+      selectedQuestions: []
+    }
+  }
+
+  handlePressQuestion(questionId) {
+    if (this.state.selectedQuestions.find(sq => sq === questionId)) {
+      this.setState({
+        selectedQuestions: this.state.selectedQuestions.filter(sq => sq !== questionId)
+      });
+    } else {
+      this.setState({
+        selectedQuestions: [
+          ...this.state.selectedQuestions,
+          questionId
+        ]
+      });
+    }
+  }
+
   render() {
+    const { questions, selectedQuestions } = this.state;
+
     return (
       <View style={styles.container}>
-        <List>
-          {
-            this.props.questions.map((question) => (
-              <ListItem 
-                key={question.id}
-                title={question.text} 
-              />
-            ))
-          }
-        </List>
+        {
+          questions.map(question => (
+            <ListItem
+              checkmark={selectedQuestions.find(sq => sq === question.id)}
+              key={question.id}
+              title={question.text}
+              onPress={this.handlePressQuestion.bind(this, question.id)}
+            />
+          ))
+        }
       </View>
     )
   }
