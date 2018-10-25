@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Question List Row Renders a question 1`] = `
+<View
+  style={
+    Object {
+      "flex": 1,
+      "flexDirection": "row",
+      "marginBottom": 10,
+      "marginLeft": 10,
+    }
+  }
+>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+    style={
+      Object {
+        "marginRight": 10,
+      }
+    }
+  >
+    First question?
+  </Text>
+  <View
+    style={
+      Object {
+        "backgroundColor": "#39FF14",
+        "borderRadius": 5,
+        "height": 10,
+        "width": 10,
+      }
+    }
+  />
+</View>
+`;

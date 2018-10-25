@@ -6,24 +6,24 @@ import {
 import QuestionListRow from '../question-list-row/question-list-row.component';
 
 class QuestionList extends Component {
-  handlePress = () => {
+  handlePress() {
     //Take the user to the corresponding
     //manage question component
   }
-  keyExtractor = ( question, index ) => question.id;
+  keyExtractor( question, index ) {
+    return question.id;
+  }
   render() {
 
     const { questions } = this.props
 
     return (
       <View>
-        { questions && 
-            <FlatList 
-              data={ questions }
-              keyExtractor={ this.keyExtractor }
-              renderItem={ ({ item }) => <QuestionListRow question={item} /> }
-            />
-        }
+          <FlatList 
+            data={ questions }
+            keyExtractor={ this.keyExtractor }
+            renderItem={ ({ item }) => <QuestionListRow question={item} /> }
+          />
       </View>
     )
   }
