@@ -1,28 +1,28 @@
 import React, { Component } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { ListItem } from 'react-native-elements';
+import { getQuestions } from '../../utils/api'
+import { Ionicons } from '@expo/vector-icons'
 
 //TO-DO: Add redux
 
 class QuestionList extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      questions: props.questions,
-      selectedQuestions: []
-    }
+  state = {
+    questions: getQuestions(),
+    selectedQuestions: []
   }
-
   handlePressQuestion(questionId) {
-    if (this.state.selectedQuestions.find(sq => sq === questionId)) {
+
+    const { selectedQuestions } = this.state;
+
+    if (selectedQuestions.find(sq => sq === questionId)) {
       this.setState({
-        selectedQuestions: this.state.selectedQuestions.filter(sq => sq !== questionId)
+        selectedQuestions: selectedQuestions.filter(sq => sq !== questionId)
       });
     } else {
       this.setState({
         selectedQuestions: [
-          ...this.state.selectedQuestions,
+          ...selectedQuestions,
           questionId
         ]
       });
@@ -41,6 +41,8 @@ class QuestionList extends Component {
               key={question.id}
               title={question.text}
               onPress={this.handlePressQuestion.bind(this, question.id)}
+              rightIcon={question.active && <View style={styles.greenCircle}/>}
+              rightTitle={question.active ? "Active" : ""}
             />
           ))
         }
@@ -53,6 +55,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center'
+  },
+  greenCircle: {
+    width: 10,
+    height: 10,
+    borderRadius: 10/2,
+    backgroundColor: '#39FF14',
   }
 });
 
