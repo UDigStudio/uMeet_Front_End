@@ -1,23 +1,14 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import {
+  createStackNavigator,
+} from 'react-navigation';
+import QuestionList from '../question-list/question-list.component';
 
-class App extends React.Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text>Hello, friend!</Text>
-      </View>
-    );
+const App = createStackNavigator({
+  Home: { 
+    screen: QuestionList
   }
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+},{
+  initialRouteName: 'Home'
 });
 
-export default App
+export default App;

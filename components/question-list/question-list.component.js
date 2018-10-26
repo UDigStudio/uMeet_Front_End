@@ -8,8 +8,16 @@ import { Ionicons } from '@expo/vector-icons'
 
 class QuestionList extends Component {
   state = {
-    questions: getQuestions(),
+    questions: [],
     selectedQuestions: []
+  }
+  componentDidMount() {
+    
+    const questions = getQuestions();
+    
+    this.setState({
+      questions
+    })
   }
   handlePressQuestion(questionId) {
 
@@ -37,7 +45,7 @@ class QuestionList extends Component {
         {
           questions.map(question => (
             <ListItem
-              checkmark={selectedQuestions.find(sq => sq === question.id)}
+              checkmark={selectedQuestions.includes(question.id)}
               key={question.id}
               title={question.text}
               onPress={this.handlePressQuestion.bind(this, question.id)}
