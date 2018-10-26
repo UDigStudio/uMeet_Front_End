@@ -1,26 +1,5 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import StorybookUI from "./storybook";
 
+import App from "./components/app/app.component";
 
-export default from './storybook';
-// To switch to app uncomment and comment line above.
-/*
-export default class App extends React.Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text>Hello, friend!</Text>
-      </View>
-    );
-  }
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
-*/
+module.exports = __DEV__ ? StorybookUI : App;

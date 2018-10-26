@@ -32,8 +32,6 @@ storiesOf('Authentication/ResetPassword', module)
 
 storiesOf('Manage Questions', module)
     .add('Show Question List', () => (
-      <QuestionList 
-        questions={[{ id: '1', text: 'First question?' }, { id: '2', text: 'Second question?' }]}
-      />
+      <QuestionList />
     ));
 
