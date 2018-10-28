@@ -1,23 +1,17 @@
 import React, { Component } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 import { ListItem } from 'react-native-elements';
-import { getQuestions } from '../../utils/api'
-import { Ionicons } from '@expo/vector-icons'
-
-//TO-DO: Add redux
+import { getQuestions } from '../../utils/api';
+import { Ionicons } from '@expo/vector-icons';
+import { connect } from 'react-redux';
+import { handleGetQuestions } from '../../actions/questions';
 
 class QuestionList extends Component {
   state = {
-    questions: [],
     selectedQuestions: []
   }
   componentDidMount() {
-    
-    const questions = getQuestions();
-    
-    this.setState({
-      questions
-    })
+    this.props.dispatch(handleGetQuestions());
   }
   handlePressQuestion(questionId) {
 
@@ -38,31 +32,43 @@ class QuestionList extends Component {
   }
 
   render() {
-    const { questions, selectedQuestions } = this.state;
+    const { questions } = this.props;
+    const { selectedQuestions } = this.state
 
     return (
       <View style={styles.container}>
         {
-          questions.map(question => (
-            <ListItem
-              checkmark={selectedQuestions.includes(question.id)}
-              key={question.id}
-              title={question.text}
-              onPress={this.handlePressQuestion.bind(this, question.id)}
-              rightIcon={question.active && <View style={styles.greenCircle}/>}
-              rightTitle={question.active ? "Active" : ""}
-            />
-          ))
+          questions
+          ? <View>
+            {
+              Object.keys(questions).map((key, index) => (
+                <ListItem
+                  checkmark={selectedQuestions.includes(questions[key].id)}
+                  key={questions[key].id}
+                  title={questions[key].text}
+                  onPress={this.handlePressQuestion.bind(this, questions[key].id)}
+                  rightIcon={questions[key].active && <View style={styles.greenCircle}/>}
+                  rightTitle={questions[key].active ? "Active" : ""}
+                />
+              ))
+            }
+          </View>
+          : <View><Text>Loading...</Text></View>
         }
       </View>
     )
   }
 }
 
+const mapStateToProps = ({questions}) => {
+  return {
+    questions
+  }
+}
+
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: 'center'
+    flex: 1
   },
   greenCircle: {
     width: 10,
@@ -72,4 +78,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default QuestionList
+export default connect(mapStateToProps)(QuestionList);
