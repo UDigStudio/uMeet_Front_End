@@ -11,6 +11,7 @@ import { createStore } from "redux";
 import reducer from "../../reducers";
 import middleware from "../../middleware";
 import { Provider } from 'react-redux';
+import TakePicture from "../../components/take-picture/take-picture.component";
 
 const store = createStore(reducer, middleware);
 
@@ -46,6 +47,12 @@ storiesOf('Shadow Text', module)
   .add('Text with App styling', () => (
       <ShadowText>Hello World!</ShadowText>
     ));
+
+
+storiesOf('TakePicture', module)
+  .add('TakePicture', () => (
+    <TakePicture/>
+  ));
 
 storiesOf('Waiting Screen', module)
   .addDecorator(story => <Provider store={store}>{story()}</Provider>)
