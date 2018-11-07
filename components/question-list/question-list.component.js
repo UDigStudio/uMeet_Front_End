@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, Button } from 'react-native';
 import { ListItem } from 'react-native-elements';
 import { getQuestions } from '../../utils/api';
-import { Ionicons } from '@expo/vector-icons';
 import { connect } from 'react-redux';
 import { handleGetQuestions } from '../../actions/questions';
+import QuestionListHeader from '../question-list-header/question-list-header.component';
 
 class QuestionList extends Component {
   state = {

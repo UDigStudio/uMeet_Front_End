@@ -1,15 +1,28 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { createStackNavigator } from 'react-navigation';
+import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import reducer from '../../reducers';
 import QuestionList from '../question-list/question-list.component';
 import middleware from '../../middleware';
+import QuestionCreate from '../question-create/question-create.component';
+import { FontAwesome } from '@expo/vector-icons';
+
+
+const Tabs = createBottomTabNavigator({
+  QuestionList: {
+    screen: QuestionList,
+    navigationOptions: {
+      tabBarLabel: 'Manage Questions',
+      tabBarIcon: <FontAwesome name="list" size={30} />
+    }
+  }
+})
 
 const MainNavigator = createStackNavigator({
   Home: { 
-    screen: QuestionList
+    screen: Tabs
   }
 },{
   initialRouteName: 'Home'
