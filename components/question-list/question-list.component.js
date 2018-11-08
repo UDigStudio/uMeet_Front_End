@@ -3,37 +3,26 @@ import { StyleSheet, View, Text, Button } from 'react-native';
 import { ListItem } from 'react-native-elements';
 import { getQuestions } from '../../utils/api';
 import { connect } from 'react-redux';
-import { handleGetQuestions } from '../../actions/questions';
+import { handleGetQuestions, handleDeleteQuestion, handleUpdateActivation } from '../../actions/questions';
 import QuestionListHeader from '../question-list-header/question-list-header.component';
+import Swipeout from 'react-native-swipeout';
+import { WHITE, RED } from '../../utils/colors';
+
+/* TODO: Selecting a question should activate it */
+/* TODO: Question titles longer than X character should be abbreviated */
 
 class QuestionList extends Component {
-  state = {
-    selectedQuestions: []
-  }
   componentDidMount() {
     this.props.dispatch(handleGetQuestions());
   }
-  handlePressQuestion(questionId) {
-
-    const { selectedQuestions } = this.state;
-
-    if (selectedQuestions.find(sq => sq === questionId)) {
-      this.setState({
-        selectedQuestions: selectedQuestions.filter(sq => sq !== questionId)
-      });
-    } else {
-      this.setState({
-        selectedQuestions: [
-          ...selectedQuestions,
-          questionId
-        ]
-      });
-    }
+  handleActivate(question) {
+    this.props.dispatch(handleUpdateActivation(question));
   }
-
+  handleDelete(id) {
+    this.props.dispatch(handleDeleteQuestion(id))
+  }
   render() {
     const { questions } = this.props;
-    const { selectedQuestions } = this.state
 
     return (
       <View style={styles.container}>
@@ -42,14 +31,22 @@ class QuestionList extends Component {
           ? <View>
             {
               Object.keys(questions).map((key, index) => (
-                <ListItem
-                  checkmark={selectedQuestions.includes(questions[key].id)}
+                <Swipeout 
                   key={questions[key].id}
-                  title={questions[key].text}
-                  onPress={this.handlePressQuestion.bind(this, questions[key].id)}
-                  rightIcon={questions[key].active && <View style={styles.greenCircle}/>}
-                  rightTitle={questions[key].active ? "Active" : ""}
-                />
+                  right={[{
+                    text: 'Delete',
+                    color: WHITE,
+                    backgroundColor: RED,
+                    onPress: () => this.handleDelete(questions[key].id)
+                  }]}
+                >
+                  <ListItem
+                    title={questions[key].text}
+                    onPress={() => this.handleActivate(questions[key])}
+                    rightIcon={questions[key].active && <View style={styles.greenCircle}/>}
+                    rightTitle={questions[key].active ? "Active" : ""}
+                  />
+                </Swipeout>
               ))
             }
           </View>
