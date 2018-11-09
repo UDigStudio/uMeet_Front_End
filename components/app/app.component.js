@@ -8,21 +8,29 @@ import QuestionList from '../question-list/question-list.component';
 import middleware from '../../middleware';
 import QuestionCreate from '../question-create/question-create.component';
 import { FontAwesome } from '@expo/vector-icons';
-
+import QuestionCreateButton from '../question-create-button/question-create-button.component';
 
 const Tabs = createBottomTabNavigator({
   QuestionList: {
     screen: QuestionList,
     navigationOptions: {
       tabBarLabel: 'Manage Questions',
-      tabBarIcon: <FontAwesome name="list" size={30} />
+      tabBarIcon: <FontAwesome name="list" size={30} />,
     }
   }
 })
 
 const MainNavigator = createStackNavigator({
   Home: { 
-    screen: Tabs
+    screen: Tabs,
+    navigationOptions: { 
+      headerLeft: (
+        <QuestionCreateButton />
+      )
+    }
+  },
+  QuestionCreate: {
+    screen: QuestionCreate
   }
 },{
   initialRouteName: 'Home'

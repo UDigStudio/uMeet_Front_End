@@ -4,11 +4,9 @@ import { ListItem } from 'react-native-elements';
 import { getQuestions } from '../../utils/api';
 import { connect } from 'react-redux';
 import { handleGetQuestions, handleDeleteQuestion, handleUpdateActivation } from '../../actions/questions';
-import QuestionListHeader from '../question-list-header/question-list-header.component';
 import Swipeout from 'react-native-swipeout';
 import { WHITE, RED } from '../../utils/colors';
 
-/* TODO: Selecting a question should activate it */
 /* TODO: Question titles longer than X character should be abbreviated */
 
 class QuestionList extends Component {
