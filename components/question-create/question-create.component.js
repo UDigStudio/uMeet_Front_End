@@ -1,12 +1,29 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import { TextInput, StyleSheet } from 'react-native';
+import TextButton from '../buttons/text-button/text-button.component';
+import StandardInput from '../inputs/standard-input/standard-input.component';
 
 class QuestionCreate extends Component {
+  state = {
+    question: null
+  }
+  createQuestion() {
+    console.log(this.state.question);
+  }
   render() {
     return (
-      <View>
-        <TextInput />
+      <View style={styles.container}>
+        <View style={styles.input}>
+          <StandardInput 
+            action={(question) => this.setState({question})}
+            value={this.state.question}
+          />
+        </View>
+        <TextButton 
+          text={'Add Question'}
+          action={() => this.createQuestion()}
+        />
       </View>
     )
   }
@@ -14,7 +31,12 @@ class QuestionCreate extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  input: {
+    marginBottom: 20
   }
 });
 
