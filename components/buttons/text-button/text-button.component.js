@@ -2,18 +2,14 @@ import React, { Component } from 'react';
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { BLACK } from '../../../utils/colors';
 
-class TextButton extends Component {
-  render() {
-    return (
-      <TouchableOpacity 
-        onPress={this.props.action} 
-        style={styles.button}
-      >
-        <Text>{this.props.text}</Text>
-      </TouchableOpacity>
-    )
-  }
-}
+const TextButton = (props) => (
+  <TouchableOpacity 
+    onPress={props.action} 
+    style={styles.button}
+  >
+    <Text>{props.text}</Text>
+  </TouchableOpacity>
+)
 
 const styles = StyleSheet.create({
   button: {

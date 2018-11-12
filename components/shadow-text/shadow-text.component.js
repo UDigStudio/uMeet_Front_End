@@ -1,14 +1,9 @@
-import React, {Component} from "react";
-import {StyleSheet, Text} from "react-native";
+import React, { Component } from "react";
+import { StyleSheet, Text } from "react-native";
 
-class ShadowText extends Component {
-
-  render() {
-    return (
-      <Text style={styles.title}>{this.props.children}</Text>
-    )
-  }
-}
+const ShadowText = (props) => (
+  <Text style={styles.title}>{props.children}</Text>
+)
 
 const styles = StyleSheet.create({
   title: {
