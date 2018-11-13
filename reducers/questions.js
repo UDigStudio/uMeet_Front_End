@@ -2,7 +2,6 @@ import { GET_QUESTIONS, DELETE_QUESTION, UPDATE_ACTIVATION } from '../actions/qu
 
 /*
 * TODO:
-* 1. Rename to GET_QUESTIONS
 * 2. Add in GET_QUESTIONS_SUCCESS and GET_QUESTIONS_FAILURE
 * 3. Add in ISQUESTIONLOADING in the store
 * 4. Error message in redux store
