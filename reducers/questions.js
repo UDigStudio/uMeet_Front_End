@@ -1,4 +1,4 @@
-import { RECEIVE_QUESTIONS, DELETE_QUESTION, UPDATE_ACTIVATION } from '../actions/questions';
+import { GET_QUESTIONS, DELETE_QUESTION, UPDATE_ACTIVATION } from '../actions/questions';
 
 /*
 * TODO:
@@ -10,7 +10,7 @@ import { RECEIVE_QUESTIONS, DELETE_QUESTION, UPDATE_ACTIVATION } from '../action
 
 export default questions = (state = [], action) => {
   switch(action.type) {
-    case RECEIVE_QUESTIONS:
+    case GET_QUESTIONS:
       return [
         ...state,
         ...action.questions
