@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Text, Button } from 'react-native';
 import { ListItem } from 'react-native-elements';
-import { getQuestions } from '../../utils/api';
 import { connect } from 'react-redux';
-import { handleGetQuestions, handleDeleteQuestion, handleUpdateActivation } from '../../actions/questions';
+import { handleDeleteQuestion, handleUpdateActivation } from '../../actions/questions';
 import Swipeout from 'react-native-swipeout';
 import { WHITE, RED } from '../../utils/colors';
+import { getQuestions } from '../../services/questions.service';
 
 /* TODO: Question titles longer than X character should be abbreviated */
+/* TODO: Services breakout */
 
 class QuestionList extends Component {
   componentDidMount() {
-    this.props.dispatch(handleGetQuestions());
+    this.props.getQuestionList();
   }
   handleActivate(question) {
     this.props.dispatch(handleUpdateActivation(question));
@@ -61,6 +62,10 @@ const mapStateToProps = ({questions}) => {
   }
 }
 
+const mapDispatchToProps = (dispatch: Function) => ({
+  getQuestionList: () => dispatch(getQuestions())
+});
+
 const styles = StyleSheet.create({
   container: {
     flex: 1
@@ -73,4 +78,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default connect(mapStateToProps)(QuestionList);
+export default connect(mapStateToProps, mapDispatchToProps)(QuestionList);

@@ -1,16 +1,10 @@
-import { getQuestions, deleteQuestionById, saveQuestion } from '../utils/api';
+import { deleteQuestionById, saveQuestion } from '../utils/api';
 
 export const GET_QUESTIONS = 'GET_QUESTIONS';
 export const DELETE_QUESTION = 'DELETE_QUESTION';
 export const UPDATE_ACTIVATION = 'UPDATE_ACTIVATION';
 
-const handleGetQuestions = () => {
-  return (dispatch) => {
-    dispatch(getQuestionsAction(getQuestions()));
-  }
-}
-
-const getQuestionsAction = (questions) => {
+export const getQuestionsAction = (questions) => {
   return {
     type: GET_QUESTIONS,
     questions
@@ -44,5 +38,5 @@ const updateActivation = (question) => {
   }
 }
 
-export { handleGetQuestions, handleDeleteQuestion, handleUpdateActivation }
+export { handleDeleteQuestion, handleUpdateActivation }
 

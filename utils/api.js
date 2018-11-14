@@ -9,9 +9,9 @@
 const questions = [{ id: '1', text: 'First question?', active: true }, { id: '2', text: 'Second question?', active: false }];
 
 //Get all questions
-const getQuestions = () => {
-  return questions;
-}
+const getQuestions = new Promise((resolve, reject) => {
+  resolve(questions);
+});
 
 //Get a specific question by id
 

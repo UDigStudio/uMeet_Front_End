@@ -1,4 +1,5 @@
 import { GET_QUESTIONS, DELETE_QUESTION, UPDATE_ACTIVATION } from '../actions/questions';
+import type { Question } from '../types/question.type';
 
 /*
 * TODO:
@@ -7,7 +8,7 @@ import { GET_QUESTIONS, DELETE_QUESTION, UPDATE_ACTIVATION } from '../actions/qu
 * 4. Error message in redux store
 */
 
-export default questions = (state = [], action) => {
+export default questions = (state: Array<Question> = [], action: Array<Question> | string | Question) => {
   switch(action.type) {
     case GET_QUESTIONS:
       return [
