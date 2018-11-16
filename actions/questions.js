@@ -24,19 +24,12 @@ const deleteQuestion = (id) => {
   }
 }
 
-const handleUpdateActivation = (question) => {
-  return (dispatch) => {
-    saveQuestion(question);
-    dispatch(updateActivation(question));
-  }
-}
-
-const updateActivation = (question) => {
+export const activateQuestionAction = (question) => {
   return {
     type: UPDATE_ACTIVATION,
     question
   }
 }
 
-export { handleDeleteQuestion, handleUpdateActivation }
+export { handleDeleteQuestion }
 

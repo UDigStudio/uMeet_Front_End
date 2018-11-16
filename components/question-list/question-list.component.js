@@ -1,3 +1,5 @@
+// @flow
+
 import React, { Component } from 'react';
 import { StyleSheet, View, Text, Button } from 'react-native';
 import { ListItem } from 'react-native-elements';
@@ -5,17 +7,18 @@ import { connect } from 'react-redux';
 import { handleDeleteQuestion, handleUpdateActivation } from '../../actions/questions';
 import Swipeout from 'react-native-swipeout';
 import { WHITE, RED } from '../../utils/colors';
-import { getQuestions } from '../../services/questions.service';
+import { getQuestions, activateQuestion } from '../../services/questions.service';
 
 /* TODO: Question titles longer than X character should be abbreviated */
 /* TODO: Services breakout */
+/* TODO: Flow */
 
 class QuestionList extends Component {
   componentDidMount() {
-    this.props.getQuestionList();
+    this.props.handleGetQuestion();
   }
   handleActivate(question) {
-    this.props.dispatch(handleUpdateActivation(question));
+    this.props.handleActivateQuestion(question);
   }
   handleDelete(id) {
     this.props.dispatch(handleDeleteQuestion(id))
@@ -63,7 +66,8 @@ const mapStateToProps = ({questions}) => {
 }
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  getQuestionList: () => dispatch(getQuestions())
+  handleGetQuestion: () => dispatch(getQuestions()),
+  handleActivateQuestion: (question) => dispatch(activateQuestion(question))
 });
 
 const styles = StyleSheet.create({

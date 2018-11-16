@@ -9,22 +9,21 @@
 const questions = [{ id: '1', text: 'First question?', active: true }, { id: '2', text: 'Second question?', active: false }];
 
 //Get all questions
-const getQuestions = new Promise((resolve, reject) => {
+export const getQuestions = new Promise((resolve, reject) => {
   resolve(questions);
 });
 
-//Get a specific question by id
-
 //Save a question
-const saveQuestion = (updatedQuestion) => {
-  const index = questions.findIndex(question => question.id === updatedQuestion.id);
-  questions[index] = updatedQuestion;
-}
+export const saveQuestion = (updatedQuestion) => {
+  return new Promise((resolve, reject) => {
+    const index = questions.findIndex(question => question.id === updatedQuestion.id);
+    questions[index] = updatedQuestion;
+    resolve();
+  });
+};
 
 //Delete a question by id
-const deleteQuestionById = (id) => {
+export const deleteQuestionById = (id) => {
   questions = questions.filter( question => question.id !== id );
   return id;
-}
-
-export { getQuestions, deleteQuestionById, saveQuestion }
+};
