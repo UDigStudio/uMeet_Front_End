@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import questions from './questions';
+import questions from './questions.reducer';
 import game from "./game";
 
 export default combineReducers({

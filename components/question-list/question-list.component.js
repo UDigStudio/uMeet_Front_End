@@ -10,7 +10,6 @@ import { getQuestions, activateQuestion, deleteQuestion } from '../../services/q
 import { Question } from '../../types/question.type';
 
 /* TODO: Question titles longer than X character should be abbreviated */
-/* TODO: Flow */
 
 class QuestionList extends Component {
   componentDidMount() {
@@ -58,9 +57,10 @@ class QuestionList extends Component {
   }
 }
 
-const mapStateToProps = ({questions}) => {
+const mapStateToProps = (state) => {
+  console.log(state);
   return {
-    questions
+    questions: state.questions
   }
 }
 

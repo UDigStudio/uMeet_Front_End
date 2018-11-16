@@ -1,17 +1,18 @@
 // @flow
-import { getQuestions, saveQuestion, deleteQuestion } from '../utils/api';
-import { getQuestionsAction, activateQuestionAction, deleteQuestionAction } from '../actions/questions';
-import { Question } from '../types/question.type';
 
-//TODO: Create proper messaging
+import { getQuestions, saveQuestion, deleteQuestion } from '../utils/api';
+import { getQuestionsSuccessAction, getQuestionsFailureAction, GET_QUESTIONS_FAILURE,
+  activateQuestionSuccessAction, activateQuestionFailureAction, UPDATE_ACTIVATION_FAILURE,
+  deleteQuestionSuccessAction, deleteQuestionFailureAction, DELETE_QUESTION_FAILURE } from '../actions/questions.action';
+import { Question } from '../types/question.type';
 
 export const getQuestionsThunk = () => {
   return (dispatch: Function) => {
     getQuestions.then((questions) => {
-      dispatch(getQuestionsAction(questions));
+      dispatch(getQuestionsSuccessAction(questions));
     })
-    .catch((error) => {
-      console.log('Error: ' + error);
+    .catch((error: Error) => {
+      dispatch(getQuestionsFailureAction(error, GET_QUESTIONS_FAILURE));
     });
   };
 };
@@ -19,10 +20,10 @@ export const getQuestionsThunk = () => {
 export const activateQuestionThunk = (question: Question) => {
   return (dispatch: Function) => {
     saveQuestion(question).then(() => {
-      dispatch(activateQuestionAction(question));
+      dispatch(activateQuestionSuccessAction(question));
     })
-    .catch((error) => {
-      console.log('Error: ' + error);
+    .catch((error: Error) => {
+      dispatch(activateQuestionFailureAction(error, UPDATE_ACTIVATION_FAILURE, question));
     });
   };
 };
@@ -30,10 +31,10 @@ export const activateQuestionThunk = (question: Question) => {
 export const deleteQuestionThunk = (id: string) => {
   return (dispatch: Function) => {
     deleteQuestion(id).then(() => {
-      dispatch(deleteQuestionAction(id));
+      dispatch(deleteQuestionSuccessAction(id));
     })
-    .catch((error) => {
-      console.log('Error: ' + error);
+    .catch((error: Error) => {
+      dispatch(activateQuestionFailureAction(error, DELETE_QUESTION_FAILURE, id));
     });
   }
 };
