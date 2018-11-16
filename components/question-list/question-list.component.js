@@ -4,24 +4,23 @@ import React, { Component } from 'react';
 import { StyleSheet, View, Text, Button } from 'react-native';
 import { ListItem } from 'react-native-elements';
 import { connect } from 'react-redux';
-import { handleDeleteQuestion, handleUpdateActivation } from '../../actions/questions';
 import Swipeout from 'react-native-swipeout';
 import { WHITE, RED } from '../../utils/colors';
-import { getQuestions, activateQuestion } from '../../services/questions.service';
+import { getQuestions, activateQuestion, deleteQuestion } from '../../services/questions.service';
+import { Question } from '../../types/question.type';
 
 /* TODO: Question titles longer than X character should be abbreviated */
-/* TODO: Services breakout */
 /* TODO: Flow */
 
 class QuestionList extends Component {
   componentDidMount() {
-    this.props.handleGetQuestion();
+    this.props.handleGetQuestions();
   }
-  handleActivate(question) {
+  handleActivate(question: Question) {
     this.props.handleActivateQuestion(question);
   }
-  handleDelete(id) {
-    this.props.dispatch(handleDeleteQuestion(id))
+  handleDelete(id: string) {
+    this.props.handleDeleteQuestion(id);
   }
   render() {
     const { questions } = this.props;
@@ -66,8 +65,9 @@ const mapStateToProps = ({questions}) => {
 }
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  handleGetQuestion: () => dispatch(getQuestions()),
-  handleActivateQuestion: (question) => dispatch(activateQuestion(question))
+  handleGetQuestions: () => dispatch(getQuestions()),
+  handleActivateQuestion: (question) => dispatch(activateQuestion(question)),
+  handleDeleteQuestion: (id) => dispatch(deleteQuestion(id))
 });
 
 const styles = StyleSheet.create({

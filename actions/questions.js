@@ -1,5 +1,3 @@
-import { deleteQuestionById, saveQuestion } from '../utils/api';
-
 export const GET_QUESTIONS = 'GET_QUESTIONS';
 export const DELETE_QUESTION = 'DELETE_QUESTION';
 export const UPDATE_ACTIVATION = 'UPDATE_ACTIVATION';
@@ -11,13 +9,7 @@ export const getQuestionsAction = (questions) => {
   }
 }
 
-const handleDeleteQuestion = (id) => {
-  return (dispatch) => {
-    dispatch(deleteQuestion(deleteQuestionById(id)))
-  }
-}
-
-const deleteQuestion = (id) => {
+export const deleteQuestionAction = (id) => {
   return {
     type: DELETE_QUESTION,
     id
@@ -30,6 +22,4 @@ export const activateQuestionAction = (question) => {
     question
   }
 }
-
-export { handleDeleteQuestion }
 

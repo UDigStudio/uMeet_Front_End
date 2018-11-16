@@ -1,6 +1,6 @@
 // @flow
-import { getQuestions, saveQuestion } from '../utils/api';
-import { getQuestionsAction, activateQuestionAction } from '../actions/questions';
+import { getQuestions, saveQuestion, deleteQuestion } from '../utils/api';
+import { getQuestionsAction, activateQuestionAction, deleteQuestionAction } from '../actions/questions';
 import { Question } from '../types/question.type';
 
 //TODO: Create proper messaging
@@ -25,4 +25,15 @@ export const activateQuestionThunk = (question: Question) => {
       console.log('Error: ' + error);
     });
   };
+};
+
+export const deleteQuestionThunk = (id: string) => {
+  return (dispatch: Function) => {
+    deleteQuestion(id).then(() => {
+      dispatch(deleteQuestionAction(id));
+    })
+    .catch((error) => {
+      console.log('Error: ' + error);
+    });
+  }
 };
