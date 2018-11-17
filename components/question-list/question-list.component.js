@@ -11,7 +11,7 @@ import type { Questions } from '../../types/question.type';
 
 /* TODO: Question titles longer than X character should be abbreviated */
 /* TODO: Rip the error reporting out into a HOC */
-/* TODO: Leverage the Waiting component instead of the loading message */
+/* TODO: Create a loading component instead of using the message */
 
 class QuestionList extends Component {
   componentDidMount() {
