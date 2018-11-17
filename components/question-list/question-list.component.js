@@ -7,9 +7,11 @@ import { connect } from 'react-redux';
 import Swipeout from 'react-native-swipeout';
 import { WHITE, RED } from '../../utils/colors';
 import { getQuestions, activateQuestion, deleteQuestion } from '../../services/questions.service';
-import { Question } from '../../types/question.type';
+import type { Questions } from '../../types/question.type';
 
 /* TODO: Question titles longer than X character should be abbreviated */
+/* TODO: Rip the error reporting out into a HOC */
+/* TODO: Leverage the Waiting component instead of the loading message */
 
 class QuestionList extends Component {
   componentDidMount() {
@@ -23,34 +25,42 @@ class QuestionList extends Component {
   }
   render() {
     const { questions } = this.props;
+    const { error } = this.props;
 
     return (
       <View style={styles.container}>
         {
-          questions
+          error
           ? <View>
-            {
-              Object.keys(questions).map((key, index) => (
-                <Swipeout 
-                  key={questions[key].id}
-                  right={[{
-                    text: 'Delete',
-                    color: WHITE,
-                    backgroundColor: RED,
-                    onPress: () => this.handleDelete(questions[key].id)
-                  }]}
-                >
-                  <ListItem
-                    title={questions[key].text}
-                    onPress={() => this.handleActivate(questions[key])}
-                    rightIcon={questions[key].active && <View style={styles.greenCircle}/>}
-                    rightTitle={questions[key].active ? "Active" : ""}
-                  />
-                </Swipeout>
-              ))
-            }
-          </View>
-          : <View><Text>Loading...</Text></View>
+              <Text>Something went wrong!</Text>
+              <Text>{error.message}</Text>
+            </View>
+          : questions
+            ? <View>
+                {
+                  questions.map((question) => (
+                    <Swipeout 
+                      key={question.id}
+                      right={[{
+                        text: 'Delete',
+                        color: WHITE,
+                        backgroundColor: RED,
+                        onPress: () => this.handleDelete(question.id)
+                      }]}
+                    >
+                      <ListItem
+                        title={question.text}
+                        onPress={() => this.handleActivate(question)}
+                        rightIcon={question.active && <View style={styles.greenCircle}/>}
+                        rightTitle={question.active ? "Active" : ""}
+                      />
+                    </Swipeout>
+                  ))
+                }
+              </View>
+          : <View>
+              <Text>Loading...</Text>
+            </View>
         }
       </View>
     )
@@ -58,9 +68,9 @@ class QuestionList extends Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log(state);
   return {
-    questions: state.questions
+    questions: state.questionReducer.questions,
+    error: state.questionReducer.error
   }
 }
 

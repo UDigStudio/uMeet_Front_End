@@ -9,7 +9,7 @@ class QuestionCreate extends Component {
     question: null
   }
   createQuestion() {
-    console.log(this.state.question);
+    
   }
   render() {
     return (

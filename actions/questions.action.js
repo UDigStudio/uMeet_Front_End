@@ -1,6 +1,6 @@
 // @flow
 
-import Question from '../types/question.type';
+import type { Questions } from '../types/question.type';
 
 export const GET_QUESTIONS_SUCCESS = 'GET_QUESTIONS_SUCCESS';
 export const GET_QUESTIONS_FAILURE = 'GET_QUESTIONS_FAILURE';
@@ -11,18 +11,17 @@ export const DELETE_QUESTION_FAILURE = 'DELETE_QUESTION_FAILURE';
 export const UPDATE_ACTIVATION_SUCCESS = 'UPDATE_ACTIVATION_SUCCESS';
 export const UPDATE_ACTIVATION_FAILURE = 'UPDATE_ACTIVATION_FAILURE';
 
-export const getQuestionsSuccessAction = (questions: Array<Question>) => {
+export const getQuestionsSuccessAction = (questionsJSON: Questions) => {
   return {
     type: GET_QUESTIONS_SUCCESS,
-    questions
+    questionsJSON
   }
 }
 
-export const getQuestionsFailureAction = (error: Error, area: string) => {
+export const getQuestionsFailureAction = (error: Error) => {
   return {
     type: GET_QUESTIONS_FAILURE,
-    error,
-    area
+    error
   }
 }
 
@@ -33,12 +32,10 @@ export const deleteQuestionSuccessAction = (id: string) => {
   }
 }
 
-export const deleteQuestionFailureAction = (error: Error, area: string, id: string) => {
+export const deleteQuestionFailureAction = (error: Error) => {
   return {
     type: DELETE_QUESTION_FAILURE,
-    error,
-    area,
-    id
+    error
   }
 }
 
@@ -49,12 +46,10 @@ export const activateQuestionSuccessAction = (question: Question) => {
   }
 }
 
-export const activateQuestionFailureAction = (error: Error, area: string, question: Question) => {
+export const activateQuestionFailureAction = (error: Error) => {
   return {
     type: UPDATE_ACTIVATION_FAILURE,
-    error,
-    area,
-    question
+    error
   }
 }
 
