@@ -1,6 +1,6 @@
 // @flow
 
-type Question = {
+export type Question = {
   id: string,
   text: string,
   active: boolean

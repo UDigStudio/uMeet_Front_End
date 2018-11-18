@@ -17,12 +17,6 @@ class QuestionList extends Component {
   componentDidMount() {
     this.props.handleGetQuestions();
   }
-  handleActivate(question: Question) {
-    this.props.handleActivateQuestion(question);
-  }
-  handleDelete(id: string) {
-    this.props.handleDeleteQuestion(id);
-  }
   render() {
     const { questions } = this.props;
     const { error } = this.props;
@@ -45,12 +39,12 @@ class QuestionList extends Component {
                         text: 'Delete',
                         color: WHITE,
                         backgroundColor: RED,
-                        onPress: () => this.handleDelete(question.id)
+                        onPress: () => this.props.handleDeleteQuestion(question.id)
                       }]}
                     >
                       <ListItem
                         title={question.text}
-                        onPress={() => this.handleActivate(question)}
+                        onPress={() => this.props.handleActivateQuestion(question)}
                         rightIcon={question.active && <View style={styles.greenCircle}/>}
                         rightTitle={question.active ? "Active" : ""}
                       />
@@ -68,6 +62,7 @@ class QuestionList extends Component {
 }
 
 const mapStateToProps = (state) => {
+  console.log(state)
   return {
     questions: state.questionReducer.questions,
     error: state.questionReducer.error

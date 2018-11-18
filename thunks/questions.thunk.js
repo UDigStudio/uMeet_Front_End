@@ -1,9 +1,12 @@
 // @flow
 
 import { getQuestions, saveQuestion, deleteQuestion } from '../utils/api';
-import { getQuestionsSuccessAction, getQuestionsFailureAction, GET_QUESTIONS_FAILURE,
-  activateQuestionSuccessAction, activateQuestionFailureAction, UPDATE_ACTIVATION_FAILURE,
-  deleteQuestionSuccessAction, deleteQuestionFailureAction, DELETE_QUESTION_FAILURE } from '../actions/questions.action';
+import { 
+  getQuestionsSuccessAction, getQuestionsFailureAction,
+  updateQuestionSuccessAction, updateQuestionFailureAction,
+  deleteQuestionSuccessAction, deleteQuestionFailureAction,
+  createQuestionSuccessAction, createQuestionFailureAction
+} from '../actions/questions.action';
 import type { Question } from '../types/question.type';
 
 export const getQuestionsThunk = () => {
@@ -17,13 +20,13 @@ export const getQuestionsThunk = () => {
   };
 };
 
-export const activateQuestionThunk = (question: Question) => {
+export const updateQuestionThunk = (question: Question) => {
   return (dispatch: Function) => {
     saveQuestion(question).then(() => {
-      dispatch(activateQuestionSuccessAction(question));
+      dispatch(updateQuestionSuccessAction(question));
     })
     .catch((error: Error) => {
-      dispatch(activateQuestionFailureAction(error));
+      dispatch(updateQuestionFailureAction(error));
     });
   };
 };
@@ -35,6 +38,17 @@ export const deleteQuestionThunk = (id: string) => {
     })
     .catch((error: Error) => {
       dispatch(deleteQuestionFailureAction(error));
+    });
+  }
+};
+
+export const createQuestionThunk = (newQuestion: Question) => {
+  return (dispatch: Function) => {
+    saveQuestion(newQuestion).then((question) => {
+      dispatch(createQuestionSuccessAction(question));
+    })
+    .catch((error: Error) => {
+      dispatch(createQuestionFailureAction(error));
     });
   }
 };

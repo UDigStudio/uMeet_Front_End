@@ -8,8 +8,11 @@ export const GET_QUESTIONS_FAILURE = 'GET_QUESTIONS_FAILURE';
 export const DELETE_QUESTION_SUCCESS = 'DELETE_QUESTION_SUCCESS';
 export const DELETE_QUESTION_FAILURE = 'DELETE_QUESTION_FAILURE';
 
-export const UPDATE_ACTIVATION_SUCCESS = 'UPDATE_ACTIVATION_SUCCESS';
-export const UPDATE_ACTIVATION_FAILURE = 'UPDATE_ACTIVATION_FAILURE';
+export const UPDATE_QUESTION_SUCCESS = 'UPDATE_QUESTION_SUCCESS';
+export const UPDATE_QUESTION_FAILURE = 'UPDATE_QUESTION_FAILURE';
+
+export const CREATE_QUESTION_SUCCESS = 'CREATE_QUESTION_SUCCESS';
+export const CREATE_QUESTION_FAILURE = 'CREATE_QUESTION_FAILURE';
 
 export const getQuestionsSuccessAction = (questionsJSON: Questions) => {
   return {
@@ -39,16 +42,30 @@ export const deleteQuestionFailureAction = (error: Error) => {
   }
 }
 
-export const activateQuestionSuccessAction = (question: Question) => {
+export const updateQuestionSuccessAction = (question: Question) => {
   return {
-    type: UPDATE_ACTIVATION_SUCCESS,
+    type: UPDATE_QUESTION_SUCCESS,
     question
   }
 }
 
-export const activateQuestionFailureAction = (error: Error) => {
+export const updateQuestionFailureAction = (error: Error) => {
   return {
-    type: UPDATE_ACTIVATION_FAILURE,
+    type: UPDATE_QUESTION_FAILURE,
+    error
+  }
+}
+
+export const createQuestionSuccessAction = (question: Question) => {
+  return {
+    type: CREATE_QUESTION_SUCCESS,
+    question
+  }
+}
+
+export const createQuestionFailureAction = (error: Error) => {
+  return {
+    type: CREATE_QUESTION_FAILURE,
     error
   }
 }

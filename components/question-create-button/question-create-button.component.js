@@ -11,7 +11,8 @@ const QuestionCreateButton = (props) => {
     <View style={styles.container}>
       <TouchableOpacity 
         style={styles.button}
-        onPress={() => handlePress()}>
+        onPress={() => handlePress()}
+        disabled={props.disabled}>
           <FontAwesome 
             name="plus" 
             size={30} 
