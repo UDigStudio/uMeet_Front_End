@@ -15,7 +15,7 @@ export const activateQuestion = (question: Question) => {
 
 export const createQuestion = (questionText: string, navigation) => {
   //Go to the question list
-  navigation.navigate('Home');
+  navigation.navigate('QuestionList');
 
   //New question
   const newQuestion = { text: questionText, active: false };

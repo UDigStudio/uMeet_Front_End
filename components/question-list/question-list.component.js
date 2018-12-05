@@ -18,51 +18,55 @@ class QuestionList extends Component {
     this.props.handleGetQuestions();
   }
   render() {
-    const { questions } = this.props;
-    const { error } = this.props;
+    const { questions, error, 
+      isLoading, handleDeleteQuestion, 
+      handleActivateQuestion } = this.props;
 
-    return (
-      <View style={styles.container}>
-        {
-          error
-          ? <View>
-              <Text>Something went wrong!</Text>
-              <Text>{error.message}</Text>
-            </View>
-          : questions
-            ? <View>
-                {
-                  questions.map((question) => (
-                    <Swipeout 
-                      key={question.id}
-                      right={[{
-                        text: 'Delete',
-                        color: WHITE,
-                        backgroundColor: RED,
-                        onPress: () => this.props.handleDeleteQuestion(question.id)
-                      }]}
-                    >
-                      <ListItem
-                        title={question.text}
-                        onPress={() => this.props.handleActivateQuestion(question)}
-                        rightIcon={question.active && <View style={styles.greenCircle}/>}
-                        rightTitle={question.active ? "Active" : ""}
-                      />
-                    </Swipeout>
-                  ))
-                }
-              </View>
-          : <View>
-              <Text>Loading...</Text>
-            </View>
-        }
-      </View>
-    )
+    if(error) {
+      return (
+        <View style={styles.container}>
+            <Text>Something went wrong!</Text>
+            <Text>{error.message}</Text>
+        </View>
+      )
+    }
+    else if (questions) {
+      return (
+        <View style={styles.container}>
+          {
+            questions.map((question) => (
+              <Swipeout 
+                key={question.id}
+                right={[{
+                  text: 'Delete',
+                  color: WHITE,
+                  backgroundColor: RED,
+                  onPress: () => handleDeleteQuestion(question.id)
+                }]}
+              >
+                <ListItem
+                  title={question.text}
+                  onPress={() => handleActivateQuestion(question)}
+                  rightIcon={question.active && <View style={styles.greenCircle}/>}
+                  rightTitle={question.active ? "Active" : ""}
+                />
+              </Swipeout>
+            ))
+          }
+        </View>
+      )
+    }
+    else {
+      return (
+        <View style={styles.container}>
+          <Text>Loading...</Text>
+        </View>
+      )
+    }
   }
 }
 
 const mapStateToProps = (state) => {
-  console.log(state)
   return {
     questions: state.questionReducer.questions,
     error: state.questionReducer.error

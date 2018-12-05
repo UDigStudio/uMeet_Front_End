@@ -3,19 +3,21 @@ import { View, TouchableOpacity, StyleSheet, Text } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import { withNavigation } from 'react-navigation';
 
-const QuestionCreateButton = (props) => {
+const iconSize = 30;
+
+const QuestionCreateButton = ({ disabled, navigation }) => {
   const handlePress = () => {
-    props.navigation.navigate('QuestionCreate');
+    navigation.navigate('QuestionCreate');
   };
   return (
     <View style={styles.container}>
       <TouchableOpacity 
         style={styles.button}
-        onPress={() => handlePress()}
-        disabled={props.disabled}>
+        onPress={handlePress}
+        disabled={disabled}>
           <FontAwesome 
             name="plus" 
-            size={30} 
+            size={iconSize} 
           />
           <Text style={styles.text}>Add Question</Text>
       </TouchableOpacity>
