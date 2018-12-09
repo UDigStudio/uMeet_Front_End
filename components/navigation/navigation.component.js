@@ -37,9 +37,8 @@ const MainNavigator = createBottomTabNavigator({
 })
 
 const Navigation = ({ loggedIn }) => (
-
   <View style={styles.container}>
-    {true 
+    {true //DEBUG
       ? <MainNavigator />
       : <Login />
     }

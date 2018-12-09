@@ -3,6 +3,7 @@
 import type { Questions } from '../types/question.type';
 
 export const GET_QUESTIONS_SUCCESS = 'GET_QUESTIONS_SUCCESS';
+
 export const GET_QUESTIONS_FAILURE = 'GET_QUESTIONS_FAILURE';
 
 export const DELETE_QUESTION_SUCCESS = 'DELETE_QUESTION_SUCCESS';
@@ -13,6 +14,8 @@ export const UPDATE_QUESTION_FAILURE = 'UPDATE_QUESTION_FAILURE';
 
 export const CREATE_QUESTION_SUCCESS = 'CREATE_QUESTION_SUCCESS';
 export const CREATE_QUESTION_FAILURE = 'CREATE_QUESTION_FAILURE';
+
+export const QUESTIONS_LOADING = "QUESTIONS_LOADING";
 
 export const getQuestionsSuccessAction = (questionsJSON: Questions) => {
   return {
@@ -67,6 +70,13 @@ export const createQuestionFailureAction = (error: Error) => {
   return {
     type: CREATE_QUESTION_FAILURE,
     error
+  }
+}
+
+export const questionsLoadingAction = (isLoading: boolean) => {
+  return {
+    type: QUESTIONS_LOADING,
+    isLoading
   }
 }
 

@@ -4,11 +4,17 @@ import {
   GET_QUESTIONS_SUCCESS, GET_QUESTIONS_FAILURE, 
   DELETE_QUESTION_SUCCESS, DELETE_QUESTION_FAILURE,
   UPDATE_QUESTION_SUCCESS, UPDATE_QUESTION_FAILURE, 
-  CREATE_QUESTION_SUCCESS, CREATE_QUESTION_FAILURE 
-} from '../actions/questions.action';
+  CREATE_QUESTION_SUCCESS, CREATE_QUESTION_FAILURE,
+  QUESTIONS_LOADING
+} from '../actions/questions.actions';
 
-export default questionReducer = ( state = {}, action ) => {
+export default questionReducer = ( state = { isLoading: true }, action ) => {
   switch(action.type) {
+    case QUESTIONS_LOADING:
+      return {
+        ...state,
+        isLoading: action.isLoading
+      }
     case GET_QUESTIONS_SUCCESS:
       return {
         ...state,

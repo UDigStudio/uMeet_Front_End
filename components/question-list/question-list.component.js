@@ -8,10 +8,11 @@ import Swipeout from 'react-native-swipeout';
 import { WHITE, RED } from '../../utils/colors';
 import { getQuestions, activateQuestion, deleteQuestion } from '../../services/questions.service';
 import type { Questions } from '../../types/question.type';
+import Error from '../error/error.component';
+import Loading from '../loading/loading.component';
 
 /* TODO: Question titles longer than X character should be abbreviated */
-/* TODO: Rip the error reporting out into a HOC */
-/* TODO: Create a loading component instead of using the message */
+/* TODO: Investigate performance enhancement by not using arrow functions in mapDispatchToProps */
 
 class QuestionList extends Component {
   componentDidMount() {
@@ -24,13 +25,15 @@ class QuestionList extends Component {
 
     if(error) {
       return (
-        <View style={styles.container}>
-            <Text>Something went wrong!</Text>
-            <Text>{error.message}</Text>
-        </View>
+        <Error error={error} />
       )
     }
-    else if (questions) {
+    else if (isLoading) {
+      return (
+        <Loading />
+      )
+    }
+    else {
       return (
         <View style={styles.container}>
           {
@@ -46,7 +49,7 @@ class QuestionList extends Component {
               >
                 <ListItem
                   title={question.text}
-                  onPress={() => handleActivateQuestion(question)} //TODO: This is the bad one
+                  onPress={() => handleActivateQuestion(question)}
                   rightIcon={question.active && <View style={styles.greenCircle}/>}
                   rightTitle={question.active ? "Active" : ""}
                 />
@@ -56,20 +59,14 @@ class QuestionList extends Component {
         </View>
       )
     }
-    else {
-      return (
-        <View style={styles.container}>
-          <Text>Loading...</Text>
-        </View>
-      )
-    }
   }
 }
 
 const mapStateToProps = (state) => {
   return {
     questions: state.questionReducer.questions,
-    error: state.questionReducer.error
+    error: state.questionReducer.error,
+    isLoading: state.questionReducer.isLoading
   }
 }
 
