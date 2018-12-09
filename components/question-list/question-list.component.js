@@ -46,7 +46,7 @@ class QuestionList extends Component {
               >
                 <ListItem
                   title={question.text}
-                  onPress={() => handleActivateQuestion(question)}
+                  onPress={() => handleActivateQuestion(question)} //TODO: This is the bad one
                   rightIcon={question.active && <View style={styles.greenCircle}/>}
                   rightTitle={question.active ? "Active" : ""}
                 />

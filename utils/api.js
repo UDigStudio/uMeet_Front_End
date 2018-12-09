@@ -22,8 +22,8 @@ export const saveQuestion = (newQuestion) => {
     } 
     //Update the question
     else {
-      const index = questionsJSON.questions.findIndex(question => question.id === newQuestion.id);
-      questionsJSON.questions[index] = newQuestion;
+      questionsJSON.questions.find(question => question.id === newQuestion.id);
+      question = newQuestion;
     }
 
     //Send the new question back
