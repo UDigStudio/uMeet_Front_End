@@ -24,16 +24,18 @@ class QuestionList extends Component {
     return () => this.props.handleActivateQuestion(question);
   }
   render() {
+
     const { questions, error, 
       getQuestionsLoading, handleDeleteQuestion, 
-      handleActivateQuestion, updateQuestionLoading } = this.props;
+      handleActivateQuestion, updateQuestionLoading, 
+      deleteQuestionLoading, createQuestionLoading } = this.props;
 
     if(error) {
       return (
         <Error error={error} />
       )
     }
-    else if (getQuestionsLoading) {
+    else if (getQuestionsLoading || updateQuestionLoading || deleteQuestionLoading || createQuestionLoading) {
       return (
         <Loading />
       )
@@ -72,7 +74,9 @@ const mapStateToProps = (state) => {
     questions: state.questionReducer.questions,
     error: state.questionReducer.error,
     getQuestionsLoading: state.questionReducer.getQuestionsLoading,
-    updateQuestionLoading: state.questionReducer.updateQuestionLoading
+    updateQuestionLoading: state.questionReducer.updateQuestionLoading,
+    deleteQuestionLoading: state.questionReducer.deleteQuestionLoading,
+    createQuestionLoading: state.questionReducer.createQuestionLoading
   }
 }
 
