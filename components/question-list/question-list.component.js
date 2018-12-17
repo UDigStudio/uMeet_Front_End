@@ -1,70 +1,90 @@
+// @flow
+
 import React, { Component } from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, Button } from 'react-native';
 import { ListItem } from 'react-native-elements';
-import { getQuestions } from '../../utils/api';
-import { Ionicons } from '@expo/vector-icons';
 import { connect } from 'react-redux';
-import { handleGetQuestions } from '../../actions/questions';
+import Swipeout from 'react-native-swipeout';
+import { WHITE, RED } from '../../utils/colors';
+import { getQuestions, activateQuestion, deleteQuestion } from '../../services/questions.service';
+import type { Questions } from '../../types/question.type';
+import Error from '../error/error.component';
+import Loading from '../loading/loading.component';
+
+/* TODO: Question titles longer than X character should be abbreviated */
 
 class QuestionList extends Component {
-  state = {
-    selectedQuestions: []
-  }
   componentDidMount() {
-    this.props.dispatch(handleGetQuestions());
+    this.props.handleGetQuestions();
   }
-  handlePressQuestion(questionId) {
+  handleDeleteQuestion(id) {
+    return () => this.props.handleDeleteQuestion(id);
+  }
+  handleActivateQuestion(question) {
+    return () => this.props.handleActivateQuestion(question);
+  }
+  render() {
 
-    const { selectedQuestions } = this.state;
+    const { questions, error, 
+      getQuestionsLoading, handleDeleteQuestion, 
+      handleActivateQuestion, updateQuestionLoading, 
+      deleteQuestionLoading, createQuestionLoading } = this.props;
 
-    if (selectedQuestions.find(sq => sq === questionId)) {
-      this.setState({
-        selectedQuestions: selectedQuestions.filter(sq => sq !== questionId)
-      });
-    } else {
-      this.setState({
-        selectedQuestions: [
-          ...selectedQuestions,
-          questionId
-        ]
-      });
+    if(error) {
+      return (
+        <Error error={error} />
+      )
+    }
+    else if (getQuestionsLoading || updateQuestionLoading || deleteQuestionLoading || createQuestionLoading) {
+      return (
+        <Loading />
+      )
+    }
+    else {
+      return (
+        <View style={styles.container}>
+          {
+            questions.map((question) => (
+              <Swipeout 
+                key={question.id}
+                right={[{
+                  text: 'Delete',
+                  color: WHITE,
+                  backgroundColor: RED,
+                  onPress: this.handleDeleteQuestion(question.id)
+                }]}
+              >
+                <ListItem
+                  title={question.text}
+                  onPress={this.handleActivateQuestion(question)}
+                  rightIcon={question.active && <View style={styles.greenCircle}/>}
+                  rightTitle={question.active ? "Active" : ""}
+                />
+              </Swipeout>
+            ))
+          }
+        </View>
+      )
     }
   }
-
-  render() {
-    const { questions } = this.props;
-    const { selectedQuestions } = this.state
-
-    return (
-      <View style={styles.container}>
-        {
-          questions
-          ? <View>
-            {
-              Object.keys(questions).map((key, index) => (
-                <ListItem
-                  checkmark={selectedQuestions.includes(questions[key].id)}
-                  key={questions[key].id}
-                  title={questions[key].text}
-                  onPress={this.handlePressQuestion.bind(this, questions[key].id)}
-                  rightIcon={questions[key].active && <View style={styles.greenCircle}/>}
-                  rightTitle={questions[key].active ? "Active" : ""}
-                />
-              ))
-            }
-          </View>
-          : <View><Text>Loading...</Text></View>
-        }
-      </View>
-    )
-  }
 }
 
-const mapStateToProps = ({questions}) => {
+const mapStateToProps = (state) => {
   return {
-    questions
+    questions: state.questionReducer.questions,
+    error: state.questionReducer.error,
+    getQuestionsLoading: state.questionReducer.getQuestionsLoading,
+    updateQuestionLoading: state.questionReducer.updateQuestionLoading,
+    deleteQuestionLoading: state.questionReducer.deleteQuestionLoading,
+    createQuestionLoading: state.questionReducer.createQuestionLoading
   }
 }
+
+const mapDispatchToProps = (dispatch: Function) => ({
+  handleGetQuestions: () => dispatch(getQuestions()),
+  handleActivateQuestion: (question) => dispatch(activateQuestion(question)),
+  handleDeleteQuestion: (id) => dispatch(deleteQuestion(id))
+});
 
 const styles = StyleSheet.create({
   container: {
@@ -78,4 +98,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default connect(mapStateToProps)(QuestionList);
+export default connect(mapStateToProps, mapDispatchToProps)(QuestionList);

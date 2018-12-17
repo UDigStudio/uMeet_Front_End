@@ -2,6 +2,8 @@ import React from 'react';
 import { TextInput } from 'react-native-gesture-handler';
 import { View, Text, Button, TouchableOpacity } from 'react-native';
 
+//WIP: Do not code review yet
+
 const style = {
   centerContent: {
     flex: 1,

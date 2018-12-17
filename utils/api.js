@@ -2,15 +2,44 @@
   API for interacting with the data store
 */
 
-//TODO: Switch to promise-based API
+//NOTE: This is just to mimick the AWS REST datastore for the time being
 
-//Get all questions
-const getQuestions = () => {
-  return [{ id: '1', text: 'First question?', active: true }, { id: '2', text: 'Second question?', active: false }];
-}
+const questionsJSON = { questions: [{ id: '1', text: 'First question?', active: true }, { id: '2', text: 'Second question?', active: false }] };
+const usersJSON = { users: [{ id: '1', email: 'test@user.com', username: 'test' }] };
 
-//Get a specific question by id
+export const getQuestions = new Promise((resolve, reject) => {
+  resolve(questionsJSON);
+});
 
-//Save a question
+export const saveQuestion = (newQuestion) => {
+  return new Promise((resolve, reject) => {
+    //If the question has an empty id, add it
+    if (!newQuestion.id) {
+      const highestId = questionsJSON.questions.reduce((currentValue, question) =>  (Number.parseInt(question.id) > Number.parseInt(currentValue)) ? question.id : currentValue, '1');
 
-export { getQuestions }
+      console.log(highestId);
+
+      newQuestion.id = (Number.parseInt(highestId) + 1).toString();
+      questionsJSON.questions.push(newQuestion);
+    } 
+    //Update the question
+    else {
+      questionsJSON.questions.find(question => question.id === newQuestion.id);
+      question = newQuestion;
+    }
+
+    //Send the new question back
+    resolve(newQuestion);
+  });
+};
+
+export const deleteQuestion = (id) => {
+  return new Promise((resolve, reject) => {
+    questionsJSON.questions = questionsJSON.questions.filter( question => question.id !== id );
+    resolve();
+  });
+};
+
+export const getUsers = new Promise((resolve, reject) => {
+  resolve(usersJSON);
+});
