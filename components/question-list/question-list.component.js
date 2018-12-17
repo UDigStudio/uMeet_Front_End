@@ -14,9 +14,17 @@ import Loading from '../loading/loading.component';
 /* TODO: Question titles longer than X character should be abbreviated */
 /* TODO: Investigate performance enhancement by not using arrow functions in mapDispatchToProps */
 
+/* TODO: ISLOADING for each Thunk */ 
+
 class QuestionList extends Component {
   componentDidMount() {
     this.props.handleGetQuestions();
+  }
+  handleDeleteQuestion(id) {
+    return () => this.props.handleDeleteQuestion(id);
+  }
+  handleActivateQuestion(question) {
+    return () => this.props.handleActivateQuestion(question);
   }
   render() {
     const { questions, error, 
@@ -44,12 +52,12 @@ class QuestionList extends Component {
                   text: 'Delete',
                   color: WHITE,
                   backgroundColor: RED,
-                  onPress: () => handleDeleteQuestion(question.id)
+                  onPress: this.handleDeleteQuestion(question.id)
                 }]}
               >
                 <ListItem
                   title={question.text}
-                  onPress={() => handleActivateQuestion(question)}
+                  onPress={this.handleActivateQuestion(question)}
                   rightIcon={question.active && <View style={styles.greenCircle}/>}
                   rightTitle={question.active ? "Active" : ""}
                 />
