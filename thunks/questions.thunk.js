@@ -2,22 +2,22 @@
 
 import { getQuestions, saveQuestion, deleteQuestion } from '../utils/api';
 import { 
-  getQuestionsSuccessAction, getQuestionsFailureAction,
-  updateQuestionSuccessAction, updateQuestionFailureAction,
-  deleteQuestionSuccessAction, deleteQuestionFailureAction,
-  createQuestionSuccessAction, createQuestionFailureAction,
-  questionsLoadingAction
+  getQuestionsSuccessAction, getQuestionsFailureAction, getQuestionsLoadingAction,
+  updateQuestionSuccessAction, updateQuestionFailureAction, updateQuestionLoadingAction,
+  deleteQuestionSuccessAction, deleteQuestionFailureAction, deleteQuestionLoadingAction,
+  createQuestionSuccessAction, createQuestionFailureAction, createQuestionLoadingAction
+  
 } from '../actions/questions.actions';
 import type { Question } from '../types/question.type';
 
 export const getQuestionsThunk = () => {
   return (dispatch: Function) => {
 
-    dispatch(questionsLoadingAction(true));
+    dispatch(getQuestionsLoadingAction(true));
 
     getQuestions.then((questionsJSON) => {
       dispatch(getQuestionsSuccessAction(questionsJSON));
-      dispatch(questionsLoadingAction(false));
+      dispatch(getQuestionsLoadingAction(false));
     })
     .catch((error: Error) => {
       dispatch(getQuestionsFailureAction(error));
@@ -28,11 +28,11 @@ export const getQuestionsThunk = () => {
 export const updateQuestionThunk = (question: Question) => {
   return (dispatch: Function) => {
 
-    dispatch(questionsLoadingAction(true));
+    dispatch(updateQuestionLoadingAction(true));
 
     saveQuestion(question).then(() => {
       dispatch(updateQuestionSuccessAction(question));
-      dispatch(questionsLoadingAction(false));
+      dispatch(updateQuestionLoadingAction(false));
     })
     .catch((error: Error) => {
       dispatch(updateQuestionFailureAction(error));
@@ -43,11 +43,11 @@ export const updateQuestionThunk = (question: Question) => {
 export const deleteQuestionThunk = (id: string) => {
   return (dispatch: Function) => {
 
-    dispatch(questionsLoadingAction(true));
+    dispatch(deleteQuestionLoadingAction(true));
 
     deleteQuestion(id).then(() => {
       dispatch(deleteQuestionSuccessAction(id));
-      dispatch(questionsLoadingAction(false));
+      dispatch(deleteQuestionLoadingAction(false));
     })
     .catch((error: Error) => {
       dispatch(deleteQuestionFailureAction(error));
@@ -58,11 +58,11 @@ export const deleteQuestionThunk = (id: string) => {
 export const createQuestionThunk = (newQuestion: Question) => {
   return (dispatch: Function) => {
 
-    dispatch(questionsLoadingAction(true));
+    dispatch(createQuestionLoadingAction(true));
 
     saveQuestion(newQuestion).then((question) => {
       dispatch(createQuestionSuccessAction(question));
-      dispatch(questionsLoadingAction(false));
+      dispatch(createQuestionLoadingAction(false));
     })
     .catch((error: Error) => {
       dispatch(createQuestionFailureAction(error));

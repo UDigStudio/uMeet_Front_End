@@ -1,20 +1,14 @@
 // @flow
 
 import { 
-  GET_QUESTIONS_SUCCESS, GET_QUESTIONS_FAILURE, 
-  DELETE_QUESTION_SUCCESS, DELETE_QUESTION_FAILURE,
-  UPDATE_QUESTION_SUCCESS, UPDATE_QUESTION_FAILURE, 
-  CREATE_QUESTION_SUCCESS, CREATE_QUESTION_FAILURE,
-  QUESTIONS_LOADING
+  GET_QUESTIONS_SUCCESS, GET_QUESTIONS_FAILURE, GET_QUESTIONS_LOADING,
+  DELETE_QUESTION_SUCCESS, DELETE_QUESTION_FAILURE, DELETE_QUESTION_LOADING,
+  UPDATE_QUESTION_SUCCESS, UPDATE_QUESTION_FAILURE, UPDATE_QUESTION_LOADING,
+  CREATE_QUESTION_SUCCESS, CREATE_QUESTION_FAILURE, CREATE_QUESTION_LOADING
 } from '../actions/questions.actions';
 
-export default questionReducer = ( state = { isLoading: true }, action ) => {
+export default questionReducer = ( state = { getQuestionsLoading: true, updateQuestionLoading: false, deleteQuestionLoading: false, createQuestionLoading: false }, action ) => {
   switch(action.type) {
-    case QUESTIONS_LOADING:
-      return {
-        ...state,
-        isLoading: action.isLoading
-      }
     case GET_QUESTIONS_SUCCESS:
       return {
         ...state,
@@ -24,6 +18,11 @@ export default questionReducer = ( state = { isLoading: true }, action ) => {
       return {
         ...state,
         error: action.error
+      }
+    case GET_QUESTIONS_LOADING:
+      return {
+        ...state,
+        getQuestionsLoading: action.getQuestionsLoading
       }
     case DELETE_QUESTION_SUCCESS:
       return {
@@ -38,6 +37,11 @@ export default questionReducer = ( state = { isLoading: true }, action ) => {
       return {
         ...state,
         error: action.error
+      }
+    case DELETE_QUESTION_LOADING:
+      return {
+        ...state,
+        deleteQuestionLoading: action.deleteQuestionLoading
       }
     case UPDATE_QUESTION_SUCCESS:
       return {
@@ -55,6 +59,11 @@ export default questionReducer = ( state = { isLoading: true }, action ) => {
         ...state,
         error: action.error
       }
+    case UPDATE_QUESTION_LOADING:
+      return {
+        ...state,
+        updateQuestionLoading: action.updateQuestionLoading
+      }
     case CREATE_QUESTION_SUCCESS:
       return {
         ...state,
@@ -64,6 +73,11 @@ export default questionReducer = ( state = { isLoading: true }, action ) => {
       return {
         ...state,
         error: action.error
+      }
+    case CREATE_QUESTION_LOADING:
+      return {
+        ...state,
+        createQuestionLoading: action.createQuestionLoading
       }
     default:
       return state;

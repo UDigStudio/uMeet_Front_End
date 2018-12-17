@@ -15,7 +15,9 @@ export const saveQuestion = (newQuestion) => {
   return new Promise((resolve, reject) => {
     //If the question has an empty id, add it
     if (!newQuestion.id) {
-      const highestId = questionsJSON.questions.reduce((currentValue, question) => ( (Number.parseInt(question.id) > Number.parseInt(highestId)) ? question.id : highestId ), '1');
+      const highestId = questionsJSON.questions.reduce((currentValue, question) =>  (Number.parseInt(question.id) > Number.parseInt(currentValue)) ? question.id : currentValue, '1');
+
+      console.log(highestId);
 
       newQuestion.id = (Number.parseInt(highestId) + 1).toString();
       questionsJSON.questions.push(newQuestion);

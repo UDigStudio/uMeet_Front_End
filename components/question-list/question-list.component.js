@@ -12,9 +12,6 @@ import Error from '../error/error.component';
 import Loading from '../loading/loading.component';
 
 /* TODO: Question titles longer than X character should be abbreviated */
-/* TODO: Investigate performance enhancement by not using arrow functions in mapDispatchToProps */
-
-/* TODO: ISLOADING for each Thunk */ 
 
 class QuestionList extends Component {
   componentDidMount() {
@@ -28,15 +25,15 @@ class QuestionList extends Component {
   }
   render() {
     const { questions, error, 
-      isLoading, handleDeleteQuestion, 
-      handleActivateQuestion } = this.props;
+      getQuestionsLoading, handleDeleteQuestion, 
+      handleActivateQuestion, updateQuestionLoading } = this.props;
 
     if(error) {
       return (
         <Error error={error} />
       )
     }
-    else if (isLoading) {
+    else if (getQuestionsLoading) {
       return (
         <Loading />
       )
@@ -74,7 +71,8 @@ const mapStateToProps = (state) => {
   return {
     questions: state.questionReducer.questions,
     error: state.questionReducer.error,
-    isLoading: state.questionReducer.isLoading
+    getQuestionsLoading: state.questionReducer.getQuestionsLoading,
+    updateQuestionLoading: state.questionReducer.updateQuestionLoading
   }
 }
 
